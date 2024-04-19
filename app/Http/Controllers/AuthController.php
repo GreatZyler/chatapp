@@ -43,12 +43,12 @@ class AuthController extends Controller
             'second_name'=>$credentials['s_name'],
             'email'=>$credentials['email'],
             'password'=>bcrypt($credentials['password']),
-            'friends'=>"[1]",
+            'friends'=>"[]",
             'last_seen'=>date('y-m-d H:i:s')
         ]);
 
        
-        broadcast(new \App\Events\SelfHere($user))->toOthers();
+       
         return redirect()->route('friend-list');
     }
 
