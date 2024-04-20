@@ -14,7 +14,8 @@ class Chat extends Model
     'for_id',
     'message',
     'chat_id',
-    'check'
+    'check',
+    'parent_id'
 
     ];
 
