@@ -3,7 +3,7 @@
     "file": "assets/bootstrap-KU_g-quu.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-pf_J_vs0.css",
+    "file": "assets/app-B9GM1tDv.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -35,17 +35,17 @@
     "src": "resources/js/etc.js",
     "isEntry": true
   },
-  "resources/js/real.js": {
-    "file": "assets/real-l0sNRNKZ.js",
-    "src": "resources/js/real.js",
-    "isEntry": true
-  },
   "resources/js/sendMessage.js": {
-    "file": "assets/sendMessage-CdeQvDFZ.js",
+    "file": "assets/sendMessage-BcXw-Opp.js",
     "src": "resources/js/sendMessage.js",
     "isEntry": true,
     "imports": [
       "_bootstrap-KU_g-quu.js"
     ]
+  },
+  "resources/js/utilities.js": {
+    "file": "assets/utilities-Ce7vPCpO.js",
+    "src": "resources/js/utilities.js",
+    "isEntry": true
   }
 }
