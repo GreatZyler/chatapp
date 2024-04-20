@@ -13,7 +13,7 @@ use Carbon\Carbon;
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        @vite(['resources/css/app.css','resources/css/etc.css', 'resources/js/sendMessage.js', 'resources/js/etc.js', 'resources/js/app.js'])
+        @vite(['resources/css/app.css','resources/css/etc.css', 'resources/js/sendMessage.js', 'resources/js/etc.js', 'resources/js/app.js', 'resources/js/utilities.js'])
 	</head>
 
 	
@@ -109,16 +109,14 @@ use Carbon\Carbon;
 						<div class="card-body msg_card_body chat-container">
 						
 						@foreach($messages as $message)
-						
-				
 				@if($message->user_id != Auth::id())
 						<div class="d-flex justify-content-start mb-4 " id="{{$message['id']}}">
 
 						
 							
-								<div class="msg_cotainer">
+								<div class="msg_cotainer ret"  draggable="true" id="{{$message['id']}}" >
 								
-									<span class="otherChat" check="{{$message['check']}}" id="{{$message['id']}}">{{$message['message']}}</span>
+									<span class="otherChat dft c{{$message['id']}}" tabindex="0" check="{{$message['check']}}" id="{{$message['id']}}" p_id="{{$message['parent_id']}}">{{$message['message']}}</span>
 									
 								</div>
 							</div>
@@ -126,8 +124,11 @@ use Carbon\Carbon;
 							
 							<div class="d-flex justify-content-end mb-4"  id="{{$message['id']}}">
 								
-								<div class="msg_cotainer">
-							<span class="ownerChat" check="{{$message['check']}}"  id="{{$message['id']}}">{{$message['message']}}</span>
+									
+							
+								<div class="msg_cotainer ret" draggable="true"id="{{$message['id']}}" >
+								
+							<span class="ownerChat dft c{{$message['id']}}" tabindex="0" check="{{$message['check']}}"  id="{{$message['id']}}" p_id="{{$message['parent_id']}}">{{$message['message']}}</span>
 								</div>
 								
 							</div>
@@ -143,11 +144,15 @@ use Carbon\Carbon;
 <input type="hidden" class="reciever_id" value="{{$user['0']['id']}}">
 
 <input type="hidden" class="owner_id" value="{{auth()->user()->id}}">
+<input type="hidden" class="parent_id" id=0>
+<div class="het">
 
+</div>
 							<div class="input-group">
 								<div class="input-group-append">
 									<span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
 								</div>
+								
 								<textarea name="" class="form-control type_msg " id="input-message" placeholder="Type your message..."></textarea>
 								
 								<div class="input-group-append">

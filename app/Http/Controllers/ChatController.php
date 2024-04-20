@@ -27,6 +27,7 @@ class ChatController extends Controller
             $chat->message=$request['message'];
             $chat->chat_id=$request['chat_id'];
             $chat->check=$check;
+            $chat->parent_id=$request['parent_id'];
             
 $chat->save();
 $user=User::where("id",'=',$chat->user_id)->get();

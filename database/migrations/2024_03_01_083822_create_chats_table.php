@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text("message");
             $table->string('chat_id');
             $table->string('check');
+            $table->integer("parent_id");
            
 
             $table->timestamps();

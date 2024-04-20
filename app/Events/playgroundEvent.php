@@ -47,6 +47,7 @@ class playgroundEvent implements ShouldBroadcast
     public function broadcastWith(){
         return [
            'message'=>$this->message,
+           'chat'=>$this->chat,
            //'user'=>$this->user->only(['name','email','id'])
         ];
     }

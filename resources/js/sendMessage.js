@@ -1,5 +1,22 @@
 import './bootstrap';
 
+//for clicking of replies don't touch
+function rep(params) {
+    let reps=document.querySelectorAll(".reps");
+
+    reps.forEach(elp=>{
+        elp.addEventListener("click",()=>{
+
+                let fot=elp.getAttribute("for");
+               
+                document.querySelector(".c"+fot).focus()
+        })
+    })
+}
+
+//end don't touch except u are God
+
+
 const form =document.querySelector("#form");
 const listMessage=document.querySelector(".chat-container");
 
@@ -93,12 +110,15 @@ channel.subscribed(()=>{
 }).listen(".playground",e=>{
     console.log(e)
     re_tick()
-    gret(e.message,"justify-content-start",false,"otherChat")
+    gret(e.message,"justify-content-start",false,"otherChat",e.chat.parent_id);
+    console.log(e.chat)
+    rep()
 })
 
 
 form.addEventListener("submit",function (event) {
     const inputMessage=document.querySelector("#input-message");
+    const parent_id=document.querySelector(".parent_id");
     event.preventDefault() 
     if (inputMessage.value===0) {
         
@@ -107,22 +127,23 @@ form.addEventListener("submit",function (event) {
       //mark as read if the two users are connected
       re_tick()
   const userInput=inputMessage.value;
-      gret(userInput,"justify-content-end",true,"ownerChat")
+      gret(userInput,"justify-content-end",true,"ownerChat",parent_id.id)
     
-
+rep()
         mess2(other_info,userInput)
    
 
    
     inputMessage.value="";
    
-
+    document.querySelector(".het").innerHTML='';
     axios.post("/chat-message",{
         owner_id:owner_id,
         reciever_id:reciever_id,
         chat_id:id_r,
         message:userInput,
-        check:connect
+        check:connect,
+        parent_id:Number(parent_id.id)
     })
    
 }
@@ -187,7 +208,13 @@ function mess(e) {
     document.querySelector(".contacts").insertAdjacentHTML('afterbegin',real)
 }
 
-function gret(e,cl,ft,th) {
+function gret(e,cl,ft,th,pd) {
+    let rt=``;
+    if (Number(pd)!==0) {
+        console.log(pd)
+        let inh=document.querySelector(".c"+pd);
+        rt=`<p class="reps" for="${pd}">${inh.innerHTML}</p>`
+    }
     let add=``
    if (ft) {
         if (connect) {
@@ -199,7 +226,7 @@ function gret(e,cl,ft,th) {
   
     let gy=`
     <div class="d-flex mb-4 ${cl}">
-								
+								${rt}
     <div class="msg_cotainer">
 <span class="${th}">${e}</span>
 
@@ -253,3 +280,4 @@ function mess2(user,chat) {
 
     document.querySelector(".contacts").insertAdjacentHTML('afterbegin',real)   
 }
+
